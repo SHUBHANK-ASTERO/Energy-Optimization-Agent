@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Energy Optimization Agent | SDG 13</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<header class="hero">
+  <div>
+    <div class="eyebrow">SDG 13 • CLIMATE ACTION</div>
+    <h1>Energy Optimization Agent</h1>
+    <p>AI-powered energy monitoring, prediction and optimization for smarter energy use.</p>
+  </div>
+  <div class="ai-pill">● AI SYSTEM ONLINE</div>
+</header>
+
+<main>
+  <section class="stats">
+    <div class="stat"><span>24-Hour Consumption</span><strong>{{ total_24 }} <small>kWh</small></strong><em>Recent usage</em></div>
+    <div class="stat"><span>AI Prediction</span><strong>{{ predicted }} <small>kWh</small></strong><em>Next-period estimate</em></div>
+    <div class="stat"><span>Estimated Cost</span><strong>₹{{ cost }}</strong><em>Based on ₹8/kWh</em></div>
+    <div class="stat"><span>CO₂ Estimate</span><strong>{{ co2 }} <small>kg</small></strong><em>0.71 kg/kWh factor</em></div>
+  </section>
+
+  <section class="layout">
+    <div class="panel large">
+      <div class="panel-head"><div><span class="section-label">ANALYTICS</span><h2>Energy Consumption</h2></div><span class="live">LIVE DATA</span></div>
+      <canvas id="usageChart"></canvas>
+    </div>
+    <div class="panel">
+      <span class="section-label">DEVICE LOAD</span>
+      <h2>Energy by Device</h2>
+      <canvas id="deviceChart"></canvas>
+    </div>
+  </section>
+
+  <section class="layout">
+    <div class="panel">
+      <div class="panel-head"><div><span class="section-label">OPTIMIZATION AGENT</span><h2>AI Recommendations</h2></div></div>
+      {% for tip in tips %}
+      <div class="recommendation"><span>✓</span><p>{{ tip }}</p></div>
+      {% endfor %}
+    </div>
+
+    <div class="panel">
+      <span class="section-label">SYSTEM STATUS</span>
+      <h2>Energy Health</h2>
+      <div class="health"><div class="dot"></div><strong>Monitoring Active</strong></div>
+      <div class="metric"><span>Average usage</span><b>{{ avg }} kWh</b></div>
+      <div class="metric"><span>Peak observed</span><b>{{ peak }} kWh</b></div>
+      <div class="metric"><span>Detected anomalies</span><b>{{ anomaly_count }}</b></div>
+      <div class="saving">Potential saving today: <strong>{{ savings }} kWh</strong></div>
+    </div>
+  </section>
+
+  <section class="panel simulator">
+    <span class="section-label">WHAT-IF PREDICTION</span>
+    <h2>Test a Future Energy Scenario</h2>
+    <div class="controls">
+      <label>Hour <input id="hour" type="number" min="0" max="23" value="14"></label>
+      <label>Temperature °C <input id="temp" type="number" value="30"></label>
+      <label>Occupancy <input id="occ" type="number" min="0" value="12"></label>
+      <label>Previous kWh <input id="prev" type="number" step="0.1" value="4"></label>
+      <button onclick="predict()">Predict</button>
+    </div>
+    <div id="prediction" class="prediction">Enter values and click Predict.</div>
+  </section>
+
+  <section class="panel about">
+    <span class="section-label">PROJECT</span>
+    <h2>How the Energy Optimization Agent Works</h2>
+    <div class="flow">
+      <div>Energy Data</div><b>→</b><div>Data Processing</div><b>→</b><div>ML Prediction</div><b>→</b><div>Anomaly Detection</div><b>→</b><div>AI Recommendations</div>
+    </div>
+    <p>The system uses historical energy data, temperature, occupancy and previous consumption to estimate future usage. It also identifies unusual consumption spikes and provides practical recommendations to reduce avoidable energy use, supporting SDG 13.</p>
+  </section>
+</main>
+
+<script>
+async function loadCharts() {
+  const usage = await fetch("/api/usage").then(r => r.json());
+  new Chart(document.getElementById("usageChart"), {
+    type: "line",
+    data: { labels: usage.labels.map(x => x.slice(11)), datasets: [{
+      label: "Energy (kWh)", data: usage.values, borderWidth: 2, tension: .35, fill: true
+    }]},
+    options: { responsive:true, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}}}
+  });
+
+  const devices = await fetch("/api/devices").then(r => r.json());
+  new Chart(document.getElementById("deviceChart"), {
+    type: "doughnut",
+    data: { labels: devices.labels, datasets: [{ data: devices.values, borderWidth: 2 }] },
+    options: { responsive:true, plugins:{legend:{position:"bottom"}}}
+  });
+}
+async function predict() {
+  const body = {
+    hour: document.getElementById("hour").value,
+    temperature: document.getElementById("temp").value,
+    occupancy: document.getElementById("occ").value,
+    previous_kwh: document.getElementById("prev").value
+  };
+  const r = await fetch("/api/predict", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)});
+  const d = await r.json();
+  document.getElementById("prediction").innerHTML =
+    `<strong>${d.predicted_kwh} kWh</strong> predicted • ₹${d.estimated_cost} estimated cost • ${d.estimated_co2} kg CO₂`;
+}
+loadCharts();
+</script>
+</body>
+</html>
