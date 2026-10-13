@@ -1,21 +1,25 @@
 from flask import Flask, render_template, jsonify, request
 from pathlib import Path
 import pandas as pd
-from model_utils import ensure_model, predict_usage, detect_anomalies, build_recommendations
-from pathlib import Path
-import pandas as pd
+
+from model_utils import (
+    ensure_model,
+    predict_usage,
+    detect_anomalies,
+    build_recommendations
+)
+
+app = Flask(__name__)
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA = BASE_DIR / "energy_data.csv"
 
 df = pd.read_csv(DATA)
-
-app = Flask(__name__)
-BASE = Path(__file__).resolve().parent
-DATA = BASE / "data" / "energy_data.csv"
-
-df = pd.read_csv(DATA)
 model = ensure_model(df)
+
+RATE_PER_KWH = 8.0
+CO2_KG_PER_KWH = 0.71
+
 
 RATE_PER_KWH = 8.0
 CO2_KG_PER_KWH = 0.71
