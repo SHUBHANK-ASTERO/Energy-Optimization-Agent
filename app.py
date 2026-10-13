@@ -2,6 +2,13 @@ from flask import Flask, render_template, jsonify, request
 from pathlib import Path
 import pandas as pd
 from model_utils import ensure_model, predict_usage, detect_anomalies, build_recommendations
+from pathlib import Path
+import pandas as pd
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA = BASE_DIR / "energy_data.csv"
+
+df = pd.read_csv(DATA)
 
 app = Flask(__name__)
 BASE = Path(__file__).resolve().parent
