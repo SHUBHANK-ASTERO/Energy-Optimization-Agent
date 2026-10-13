@@ -21,8 +21,7 @@ RATE_PER_KWH = 8.0
 CO2_KG_PER_KWH = 0.71
 
 
-RATE_PER_KWH = 8.0
-CO2_KG_PER_KWH = 0.71
+
 
 @app.route("/")
 def dashboard():
