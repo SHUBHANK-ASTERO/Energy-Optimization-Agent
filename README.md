@@ -1,93 +1,163 @@
-# Energy Optimization Agent — Complete AIML Project
+# ⚡ Energy Optimization Agent
 
-## SDG 13 – Climate Action
+### AICTE Internship Project | SDG 13 – Climate Action
 
-A complete Flask + Machine Learning prototype that monitors energy consumption, predicts future usage, detects unusual spikes, estimates cost/CO₂, and generates optimization recommendations.
+An AI-powered Energy Optimization Agent designed to analyze energy consumption, predict energy usage, and support energy-efficient decision-making using Machine Learning.
 
-### Main features
-- AI/ML energy prediction using Random Forest Regression
-- Automatic model training on the local machine
-- Energy consumption line chart
-- Device-wise energy breakdown
-- Anomaly detection
-- AI optimization recommendations
-- Electricity cost estimation
-- CO₂ emission estimation
-- What-if prediction simulator
-- Responsive professional dashboard
+## 📌 Project Overview
 
-### Tech stack
-Python, Flask, Pandas, NumPy, Scikit-learn, Joblib, HTML, CSS, JavaScript, Chart.js.
+Energy consumption is increasing across homes, educational institutions, offices, and industries. Efficient energy management can help reduce unnecessary electricity usage and support environmental sustainability.
 
-### Folder structure
+The Energy Optimization Agent uses Machine Learning and a web-based interface to demonstrate how energy consumption data can be analyzed to support better energy management decisions.
+
+## 🎯 Objectives
+
+- Analyze energy consumption data.
+- Predict energy usage using Machine Learning.
+- Demonstrate AI-assisted energy management.
+- Identify opportunities for energy optimization.
+- Promote energy efficiency and sustainable practices.
+- Support Sustainable Development Goal 13: Climate Action.
+
+## ✨ Features
+
+- Interactive web dashboard.
+- Machine Learning-based energy prediction.
+- Energy usage analysis.
+- Device-related information, where supported.
+- User-friendly interface.
+- Python and Flask backend.
+- HTML, CSS, and JavaScript frontend.
+
+## 🛠️ Technologies Used
+
+- Python
+- Flask
+- Machine Learning
+- Scikit-learn
+- HTML5
+- CSS3
+- JavaScript
+- Pandas and NumPy, if used by the project
+
+## 🧠 Machine Learning
+
+The project includes trained Machine Learning models for energy prediction.
+
+The exact models, input features, and prediction methodology should be documented according to the implementation in the repository.
+
+## 🏗️ Project Structure
+
 ```text
-Energy_Optimization_Agent_Complete/
+Energy-Optimization-Agent/
+│
 ├── app.py
-├── model_utils.py
-├── generate_dataset.py
-├── train_model.py
 ├── requirements.txt
 ├── README.md
 ├── data/
-│   └── energy_data.csv
-├── models/
-│   └── energy_model.joblib
 ├── templates/
-│   └── index.html
-└── static/
-    └── style.css
+├── static/
+└── models/
 ```
 
-### Run in VS Code
+Note: The structure above is illustrative. Update it to match the actual files and folders in your repository.
 
-Open the folder containing `app.py`.
+## 💻 Installation and Setup
+
+### Prerequisites
+
+- Python installed on your computer.
+- Git installed on your computer.
+- Visual Studio Code or another code editor.
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/YOUR-USERNAME/Energy-Optimization-Agent.git
+```
+
+Replace `YOUR-USERNAME` with your GitHub username.
+
+### Step 2: Open the Project
+
+```bash
+cd Energy-Optimization-Agent
+```
+
+### Step 3: Create a Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Step 4: Activate the Environment
+
+Windows PowerShell:
 
 ```powershell
-pip install -r requirements.txt
+.\venv\Scripts\Activate.ps1
+```
+
+Windows Command Prompt:
+
+```cmd
+venv\Scripts\activate
+```
+
+### Step 5: Install Dependencies
+
+```bash
+python -m pip install -r requirements.txt
+```
+
+### Step 6: Run the Application
+
+```bash
 python app.py
 ```
 
-Open this in Chrome/Edge:
-```text
+### Step 7: Open the Dashboard
+
+Open the following address in your browser:
+
 http://127.0.0.1:5000
-```
 
-### If you want to regenerate the dataset
-Stop Flask with Ctrl+C and run:
-```powershell
-python generate_dataset.py
-python train_model.py
-python app.py
-```
+Keep the terminal running while using the application.
 
-### Important
-The application automatically trains a new model if the model file is missing or cannot be loaded. This helps avoid scikit-learn model-version compatibility problems.
+## 🌍 Sustainable Development Goal
 
-### Project workflow
-```text
-Energy Data
-   ↓
-Preprocessing
-   ↓
-Random Forest Prediction
-   ↓
-Anomaly Detection
-   ↓
-Optimization Agent
-   ↓
-Cost + CO₂ Estimation
-   ↓
-Energy Saving Recommendations
-```
+This project aligns with **United Nations Sustainable Development Goal 13: Climate Action**.
 
-### Academic/project outcome
-The system demonstrates how machine learning can support energy efficiency and climate action by forecasting consumption, identifying abnormal usage and recommending energy-saving actions.
+It demonstrates how Machine Learning can support energy awareness and more efficient resource utilization.
 
-### Future scope
-- IoT smart-meter integration
-- Real-time device switching
-- Electricity tariff optimization
-- Mobile application
-- Cloud deployment
-- Advanced time-series models
-- Multi-building monitoring
+The project supports sustainability education but does not independently guarantee reductions in electricity consumption or carbon emissions.
+
+## 🔮 Future Improvements
+
+- Integrate real-time electricity meter data.
+- Add historical energy consumption analytics.
+- Develop personalized energy-saving recommendations.
+- Integrate weather information where relevant.
+- Add a database for storing historical readings.
+- Deploy the application to a cloud hosting platform.
+- Evaluate model performance using appropriate metrics.
+
+## 🎓 Project Information
+
+- **Project Title:** Energy Optimization Agent
+- **Internship:** AICTE Internship
+- **Domain:** Artificial Intelligence and Machine Learning
+- **Technology:** Python, Flask, and Machine Learning
+- **Sustainable Development Goal:** SDG 13 – Climate Action
+
+## 👨‍💻 Author
+
+**Shubhank Rastogi**
+
+GitHub: https://github.com/SHUBHANK-ASTERO
+
+LinkedIn: https://linkedin.com/in/shubhank-rastogi-667963378
+
+## 📄 License
+
+Choose an appropriate open-source license before distributing this project.
